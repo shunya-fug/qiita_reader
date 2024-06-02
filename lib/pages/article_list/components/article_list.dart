@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:qiita_reader/apis/qiita/providers/get_items_provider.dart';
 import 'package:qiita_reader/main.dart';
+import 'package:qiita_reader/pages/article_list/components/article.dart';
 import 'package:qiita_reader/pages/article_list/providers/scroll_controller_provider.dart';
 
 /// 記事一覧
@@ -28,6 +29,21 @@ class ArticleList extends ConsumerWidget {
               onTap: () {
                 // TODO:ここに記事詳細画面への遷移処理を書く
                 logger.i('記事詳細画面へ遷移: ${articleList[index].url}');
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return GestureDetector(
+                      onTap: () => Navigator.of(context).pop(),
+                      child: Dialog(
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height,
+                          child: Article(articleList[index].url),
+                        ),
+                      ),
+                    );
+                  },
+                );
               },
             );
           },
