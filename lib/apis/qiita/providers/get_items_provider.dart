@@ -25,6 +25,12 @@ class GetItemsRequestController extends _$GetItemsRequestController {
   }
 
   void update(GetItemsRequest request) {
-    state = request;
+    state = request.copyWith(
+      page: request.page.clamp(1, 100),
+      perPage: request.perPage.clamp(1, 100),
+      query: request.query != null && request.query!.isEmpty
+          ? null
+          : request.query,
+    );
   }
 }
