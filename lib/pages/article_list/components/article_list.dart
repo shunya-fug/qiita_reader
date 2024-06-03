@@ -27,21 +27,11 @@ class ArticleList extends ConsumerWidget {
             return ListTile(
               title: Text(articleList[index].title),
               onTap: () {
-                // TODO:ここに記事詳細画面への遷移処理を書く
                 logger.i('記事詳細画面へ遷移: ${articleList[index].url}');
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return GestureDetector(
-                      onTap: () => Navigator.of(context).pop(),
-                      child: Dialog(
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                          child: Article(articleList[index].url),
-                        ),
-                      ),
-                    );
+                    return Article(articleList[index].url);
                   },
                 );
               },
